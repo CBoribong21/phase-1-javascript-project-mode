@@ -72,6 +72,7 @@
     function fetchDogBreeds() {
       const apiUrl = 'https://dog.ceo/api/breeds/list/all';
 
+      // Fetches the data from the API
       fetch(apiUrl)
         .then(response => response.json())
         .then(data => {
@@ -91,6 +92,7 @@
     function fetchBreedOriginAndImage(breed) {
       const apiUrl = `https://dog.ceo/api/breed/${breed}/images/random`;
 
+      // Fetches the data from the API
       fetch(apiUrl)
         .then(response => response.json())
         .then(data => {
@@ -103,6 +105,7 @@
           breedOrigin.innerHTML = '<p>Failed to fetch breed origin and image. Please try again.</p>';
         });
     }
+    // Event listeners for the button clicks
     searchButton.addEventListener('click', () => {
       const breed = breedSelect.value;
 
@@ -114,6 +117,8 @@
     function toggleDarkMode() {
       document.body.classList.toggle('dark-mode');
     }
+
+
     fetchDogBreeds();
   </script>
 </body>
