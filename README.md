@@ -1,6 +1,6 @@
 # Dog Breed Search SPA
 
-This is a Single Page Application (SPA) that allows users to search for dog breeds and view their origin using the Dog CEO API.
+This is a Single Page Application (SPA) that allows users to search for dog breeds and view pictures of dogs.
 
 ## Features
 
