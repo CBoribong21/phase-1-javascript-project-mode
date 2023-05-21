@@ -1,0 +1,27 @@
+/* Add some basic styles */
+body {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+}
+
+.breed-search {
+  margin-bottom: 20px;
+}
+
+.breed-list {
+  list-style: none;
+  padding: 0;
+}
+
+.breed-list li {
+  margin-bottom: 5px;
+}
+
+.dark-mode {
+  background-image: url("https://img.freepik.com/free-vector/colorful-dog-cat-paw-prints-pattern-background_1017-28376.jpg?w=1380&t=st=1684704918~exp=1684705518~hmac=8ac4c59755c275cf3baaf8c7bc2c45e7a1654304929681c6cca421a075dabfa8");
+  color: white;
+}

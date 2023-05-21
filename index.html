@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="styles.css" />
+  <title>Dog Breed Search</title>
+  <style>
+   
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0; 
+      padding: 20px;
+      background-image: url('https://img.freepik.com/free-photo/composition-with-treats-dogs-white-surface_23-2148181689.jpg?w=1380&t=st=1684681035~exp=1684681635~hmac=299cda56ebcaa31d3a1561e74b6f47960eae1775ee919812e8776a07bb1e1069');
+      background-size: cover;
+      background-position: center; 
+      background-repeat: no-repeat;
+      height: 100vh; 
+    }
+    h1 {
+      text-align: center;
+    }
+    .search-container {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .search-input {
+      flex: 1;
+      margin-right: 10px;
+      padding: 5px;
+    }
+    .search-button {
+      padding: 5px 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    .breed-origin {
+      margin-top: 20px;
+      text-align: center;
+    }
+    .breed-image {
+      margin-top: 20px;
+      text-align: center;
+    }
+    .breed-image img {
+      max-width: 100%;
+      max-height: 300px;
+    }
+    .dark-mode {
+      background-image: url("https://img.freepik.com/free-vector/colorful-dog-cat-paw-prints-pattern-background_1017-28376.jpg?w=1380&t=st=1684704918~exp=1684705518~hmac=8ac4c59755c275cf3baaf8c7bc2c45e7a1654304929681c6cca421a075dabfa8");
+    }
+  </style>
+</head>
+<body>
+  <h1>Dog Breed Search</h1>
+  <div class="search-container">
+    <select id="breed-select" class="search-input"></select>
+    <button id="search-button" class="search-button">Search</button>
+    <button id="darkModeButton">Toggle Dark Mode</button>
+  </div>
+  <div id="breed-origin" class="breed-origin"></div>
+  <div id="breed-image" class="breed-image"></div>
+
+  <script>
+    const breedSelect = document.getElementById('breed-select');
+    const searchButton = document.getElementById('search-button');
+    const breedOrigin = document.getElementById('breed-origin');
+    const breedImage = document.getElementById('breed-image');
+    const darkModeButton = document.getElementById('darkModeButton');
+
+    function fetchDogBreeds() {
+      const apiUrl = 'https://dog.ceo/api/breeds/list/all';
+
+      fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+          const breeds = data.message;
+
+          for (const breed in breeds) {
+            const option = document.createElement('option');
+            option.value = breed;
+            option.textContent = breed;
+            breedSelect.appendChild(option);
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+    }
+    function fetchBreedOriginAndImage(breed) {
+      const apiUrl = `https://dog.ceo/api/breed/${breed}/images/random`;
+
+      fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+          const breedName = breed.split('/')[0];
+          breedOrigin.innerHTML = `<p>Breed: ${breedName}</p><p>Origin: ${data.origin}</p>`;
+          breedImage.innerHTML = `<img src="${data.message}" alt="${breedName}">`;
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          breedOrigin.innerHTML = '<p>Failed to fetch breed origin and image. Please try again.</p>';
+        });
+    }
+    searchButton.addEventListener('click', () => {
+      const breed = breedSelect.value;
+
+      if (breed !== '') {
+        fetchBreedOriginAndImage(breed);
+      }
+    });
+    darkModeButton.addEventListener('click', toggleDarkMode);
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark-mode');
+    }
+    fetchDogBreeds();
+  </script>
+</body>
+</html>
